@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +31,7 @@
 						<li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i
 									class="glyphicon glyphicon-chevron-right"></i></a></li>
 					</ul>
-
+					
 					<ul class="nav hidden-xs" id="lg-menu">
 						<li class="active"><a href="#featured"><i class="glyphicon glyphicon-list-alt"></i> Featured</a>
 						</li>
@@ -85,8 +90,9 @@
 									<a href="#"><i class="glyphicon glyphicon-home"></i> Home</a>
 								</li>
 								<li>
-									<a href="#postModal" role="button" data-toggle="modal"><i
-											class="glyphicon glyphicon-plus"></i> Post</a>
+									<a href="#postModal" role="button" data-toggle="modal">
+									<i class="glyphicon glyphicon-plus" ></i> Post</a>
+									
 								</li>
 								<li>
 									<a href="#"><span class="badge">badge</span></a>
@@ -122,7 +128,7 @@
 										<div class="panel-thumbnail"><img src="assets/img/bg_5.jpg"
 												class="img-responsive"></div>
 										<div class="panel-body">
-											<p class="lead">Non de votre blog</p>
+											<p class="lead">Nom de votre blog</p>
 											<p>45 Followers, 13 Posts</p>
 
 											<p>
@@ -134,14 +140,16 @@
 								</div>
 
 								<!-- main col right -->
-								<div class="col-sm-7">
+								<div class="panel-heading pull-right">
+									<?= $_SESSION['alertMsg'] ?>
+								</div>
 
+								<div class="col-sm-7">								
 									<div class="panel panel-default">
 										<div class="panel-heading"><a href="#" class="pull-right">View all</a>
 											<h1>Welcome !</h1>
 										</div>
-										<div class="panel-body">
-										</div>
+																			
 									</div>
 								</div>
 							</div>
@@ -164,17 +172,11 @@
 									</p>
 								</div>
 							</div>
-
 							<hr>
-
 							<h4 class="text-center">
-								<a href="http://usebootstrap.com/theme/facebook" target="ext">Download this Template
-									@Bootply</a>
+								<h4 class="text-center">Badr Boucherine © CopyRight</h4>
 							</h4>
-
 							<hr>
-
-
 						</div><!-- /col-9 -->
 					</div><!-- /padding -->
 				</div>
@@ -194,23 +196,19 @@
 					Update Status
 				</div>
 				<div class="modal-body">
-					<form class="form center-block">
+					<form class="form center-block" enctype="multipart/form-data" method="POST" action="post.php">
 						<div class="form-group">
-							<textarea class="form-control input-lg" autofocus=""
-								placeholder="What do you want to share?"></textarea>
+							<textarea name="postInput" class="form-control input-lg" autofocus="" placeholder="What do you want to share?"></textarea>
+						</div>
+						<div>
+							<div class="modal-footer">								
+								<input type="file" name="fileUploaded[]" class="btn btn-primary pull-left" class="pull left">
+								<input type="submit" class="btn btn-primary btn-sm" style="padding:8px;font-weight:bold;" value="Post" aria-hidden="true" />
+							</div>								
 						</div>
 					</form>
 				</div>
-				<div class="modal-footer">
-					<div>
-						<button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Post</button>
-						<ul class="pull-left list-inline">
-							<li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li>
-							<li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li>
-							<li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li>
-						</ul>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	</div>
