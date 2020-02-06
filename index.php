@@ -140,13 +140,13 @@ session_start();
 								</div>
 
 								<!-- main col right -->
-								<div class="panel-heading pull-right">
+								<div class="panel-heading pull-right text-lg">
 									<?= $_SESSION['alertMsg'] ?>
 								</div>
 
 								<div class="col-sm-7">								
 									<div class="panel panel-default">
-										<div class="panel-heading"><a href="#" class="pull-right">View all</a>
+										<div class="panel-heading">
 											<h1>Welcome !</h1>
 										</div>
 																			
@@ -196,13 +196,13 @@ session_start();
 					Update Status
 				</div>
 				<div class="modal-body">
-					<form class="form center-block" enctype="multipart/form-data" method="POST" action="post.php">
+					<form class="form center-block" enctype="multipart/form-data" method="POST" action="fonc/post.php">
 						<div class="form-group">
 							<textarea name="postInput" class="form-control input-lg" autofocus="" placeholder="What do you want to share?"></textarea>
 						</div>
 						<div>
 							<div class="modal-footer">								
-								<input type="file" name="fileUploaded[]" class="btn btn-primary pull-left" class="pull left">
+								<input type="file" name="fileUploaded[]" accept="image/x-png,image/gif,image/jpeg" class="btn btn-primary pull-left" class="pull left" multiple />
 								<input type="submit" class="btn btn-primary btn-sm" style="padding:8px;font-weight:bold;" value="Post" aria-hidden="true" />
 							</div>								
 						</div>
