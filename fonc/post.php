@@ -5,7 +5,7 @@ require_once('functions.php');
 
 addMediaAndPost();
 
-//header("Location: ../index.php");
+header("Location: ../index.php");
 ?>
 
 

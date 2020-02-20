@@ -147,10 +147,17 @@ session_start();
 								<div class="col-sm-7">								
 									<div class="panel panel-default">
 										<div class="panel-heading">
-											<h1>Welcome !</h1>
+											<h1>Welcome !</h1>											
 										</div>
-																			
 									</div>
+
+									<?php
+										if(isset($_SESSION['imgNames'])){			
+											// Method that get all the medias in the DB and add them in a div					
+											showAllImages();
+										}										
+									?>
+									 
 								</div>
 							</div>
 							<!--/row-->
@@ -202,7 +209,7 @@ session_start();
 						</div>
 						<div>
 							<div class="modal-footer">								
-								<input type="file" name="fileUploaded[]" accept="image/x-png,image/gif,image/jpeg" class="btn btn-primary pull-left" class="pull left" multiple />
+								<input type="file" name="fileUploaded[]"  accept="image/x-png,image/gif,image/jpeg" class="btn btn-primary pull-left" class="pull left" multiple />
 								<input type="submit" class="btn btn-primary btn-sm" style="padding:8px;font-weight:bold;" value="Post" aria-hidden="true" />
 							</div>								
 						</div>
@@ -230,3 +237,25 @@ session_start();
 </body>
 
 </html>
+
+
+<?php 
+function showAllImages(){
+	require_once('fonc/dbConn.php');
+	$_SESSION['imgNames'] = array();
+    $sqlGetAllImagesName = "SELECT nomMedia,commentaire,creationDate FROM medias NATURAL JOIN posts";
+	$arrayDatas = array();
+	$i = 0;
+    foreach ($conn->query($sqlGetAllImagesName) as $row){
+		$arrayDatas[$i] = $row;
+		$i++;        
+	}	
+	for($i = 0; $i < count($arrayDatas);$i++){
+		echo '<div class="modal-content" style="margin-bottom: 20px ;width:100%;">';
+		echo '<div class="modal-body" ><img style="padding:10px;max-width:300px;border-radius:15px;" src="upload/img/'. $arrayDatas[$i][0] .'"><label>' . $arrayDatas[$i][1] . '</label></div>';
+		echo '<div class="modal-footer" style="text-align:left;border-radius: 20px;">';
+		echo 'Date de création : ' . $arrayDatas[$i][2] . '</div>';
+		echo '</div>';
+	}
+}
+?>

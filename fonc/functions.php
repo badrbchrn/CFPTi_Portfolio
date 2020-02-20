@@ -4,18 +4,16 @@ session_start();
 // Alert that will be returned on the home page
 $alert = "";
 
+
+
 function addMediaAndPost(){
-    $user = 'root';
-    $pass = 'Super2019';
-    $conn = new PDO('mysql:host=localhost;dbname=fb_database', $user, $pass);
+    require_once('dbConn.php');
 
     // Post saving in DB
     $postInput = filter_input(INPUT_POST, 'postInput', FILTER_SANITIZE_STRING);
     $idPost = 0;
 
     $imageNumber = count(array_filter($_FILES['fileUploaded']['name']));
-
-    var_dump($_FILES['fileUploaded']);
 
     //Calls functions that check the size and the type of the files submited
     $isFileSizeOk = checkFileSize($_FILES['fileUploaded'],$imageNumber);
@@ -44,7 +42,6 @@ function addMediaAndPost(){
                     } 
 
                     for($i=0 ; $i < $imageNumber; $i++){
-                        echo $i;
                         $fileName = basename(uniqid('',true) . $_FILES['fileUploaded']['name'][$i]);
                         if(move_uploaded_file($_FILES['fileUploaded']['tmp_name'][$i], $directory . $fileName)){        
 
@@ -71,9 +68,7 @@ function addMediaAndPost(){
         }else{
             $alert = "At least one of the files is not an image !";
         }         
-    } else{
-        $alert = "NOT SET";
-    } 
+    }
     $_SESSION['alertMsg'] = $alert;
 }
 
@@ -99,5 +94,7 @@ function checkFileSize($file,$count){
     }
     return $isFileSizeOk;
 }
+
+
 
 ?>
