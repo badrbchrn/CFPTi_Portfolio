@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+
 
 
 <!DOCTYPE html>
@@ -22,41 +20,10 @@ session_start();
 
 	<div class="wrapper">
 		<div class="box">
-			<div class="row row-offcanvas row-offcanvas-left">
+			<div style="display:flex;justify-content:center;" class="row row-offcanvas row-offcanvas-left">
 
 				<!-- sidebar -->
-				<div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
-
-					<ul class="nav">
-						<li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i
-									class="glyphicon glyphicon-chevron-right"></i></a></li>
-					</ul>
-					
-					<ul class="nav hidden-xs" id="lg-menu">
-						<li class="active"><a href="#featured"><i class="glyphicon glyphicon-list-alt"></i> Featured</a>
-						</li>
-						<li><a href="#stories"><i class="glyphicon glyphicon-list"></i> Stories</a></li>
-						<li><a href="#"><i class="glyphicon glyphicon-paperclip"></i> Saved</a></li>
-						<li><a href="#"><i class="glyphicon glyphicon-refresh"></i> Refresh</a></li>
-					</ul>
-					<ul class="list-unstyled hidden-xs" id="sidebar-footer">
-						<li>
-							<a href="http://usebootstrap.com/theme/facebook">
-								<h3>Bootstrap</h3> <i class="glyphicon glyphicon-heart-empty"></i> Bootply
-							</a>
-						</li>
-					</ul>
-
-					<!-- tiny only nav-->
-					<ul class="nav visible-xs" id="xs-menu">
-						<li><a href="#featured" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a>
-						</li>
-						<li><a href="#stories" class="text-center"><i class="glyphicon glyphicon-list"></i></a></li>
-						<li><a href="#" class="text-center"><i class="glyphicon glyphicon-paperclip"></i></a></li>
-						<li><a href="#" class="text-center"><i class="glyphicon glyphicon-refresh"></i></a></li>
-					</ul>
-
-				</div>
+				
 				<!-- /sidebar -->
 
 				<!-- main right col -->
@@ -65,26 +32,8 @@ session_start();
 					<!-- top nav -->
 					<div class="navbar navbar-blue navbar-static-top">
 						<div class="navbar-header">
-							<button class="navbar-toggle" type="button" data-toggle="collapse"
-								data-target=".navbar-collapse">
-								<span class="sr-only">Toggle</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-							<a href="http://usebootstrap.com/theme/facebook" class="navbar-brand logo">b</a>
 						</div>
 						<nav class="collapse navbar-collapse" role="navigation">
-							<form class="navbar-form navbar-left">
-								<div class="input-group input-group-sm" style="max-width:360px;">
-									<input class="form-control" placeholder="Search" name="srch-term" id="srch-term"
-										type="text">
-									<div class="input-group-btn">
-										<button class="btn btn-default" type="submit"><i
-												class="glyphicon glyphicon-search"></i></button>
-									</div>
-								</div>
-							</form>
 							<ul class="nav navbar-nav">
 								<li>
 									<a href="#"><i class="glyphicon glyphicon-home"></i> Home</a>
@@ -94,22 +43,6 @@ session_start();
 									<i class="glyphicon glyphicon-plus" ></i> Post</a>
 									
 								</li>
-								<li>
-									<a href="#"><span class="badge">badge</span></a>
-								</li>
-							</ul>
-							<ul class="nav navbar-nav navbar-right">
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-											class="glyphicon glyphicon-user"></i></a>
-									<ul class="dropdown-menu">
-										<li><a href="">More</a></li>
-										<li><a href="">More</a></li>
-										<li><a href="">More</a></li>
-										<li><a href="">More</a></li>
-										<li><a href="">More</a></li>
-									</ul>
-								</li>
 							</ul>
 						</nav>
 					</div>
@@ -117,45 +50,27 @@ session_start();
 
 					<div class="padding">
 						<div class="full col-sm-9">
-
 							<!-- content -->
 							<div class="row">
 
 								<!-- main col left -->
-								<div class="col-sm-5">
-
-									<div class="panel panel-default">
-										<div class="panel-thumbnail"><img src="assets/img/bg_5.jpg"
-												class="img-responsive"></div>
-										<div class="panel-body">
-											<p class="lead">Nom de votre blog</p>
-											<p>45 Followers, 13 Posts</p>
-
-											<p>
-												<img src="assets/img/uFp_tsTJboUY7kue5XAsGAs28.png" height="28px"
-													width="28px">
-											</p>
-										</div>
-									</div>
-								</div>
 
 								<!-- main col right -->
 								<div class="panel-heading pull-right text-lg">
 									<?= $_SESSION['alertMsg'] ?>
 								</div>
 
-								<div class="col-sm-7">								
+								<div class="col-sm-7" >								
 									<div class="panel panel-default">
 										<div class="panel-heading">
-											<h1>Welcome !</h1>											
+											<h1>Your Posts !</h1>											
 										</div>
 									</div>
 
-									<?php
-										if(isset($_SESSION['imgNames'])){			
-											// Method that get all the medias in the DB and add them in a div					
-											showAllImages();
-										}										
+									<?php		
+									require_once 'fonc/functions.php';
+									// Method that get all the medias in the DB and add them in a div					
+									showAllImages();																				
 									?>
 									 
 								</div>
@@ -209,7 +124,7 @@ session_start();
 						</div>
 						<div>
 							<div class="modal-footer">								
-								<input type="file" name="fileUploaded[]"  accept="image/x-png,image/gif,image/jpeg" class="btn btn-primary pull-left" class="pull left" multiple />
+								<input type="file" name="fileUploaded[]" class="btn btn-primary pull-left" class="pull left" multiple />
 								<input type="submit" class="btn btn-primary btn-sm" style="padding:8px;font-weight:bold;" value="Post" aria-hidden="true" />
 							</div>								
 						</div>
@@ -237,25 +152,3 @@ session_start();
 </body>
 
 </html>
-
-
-<?php 
-function showAllImages(){
-	require_once('fonc/dbConn.php');
-	$_SESSION['imgNames'] = array();
-    $sqlGetAllImagesName = "SELECT nomMedia,commentaire,creationDate FROM medias NATURAL JOIN posts";
-	$arrayDatas = array();
-	$i = 0;
-    foreach ($conn->query($sqlGetAllImagesName) as $row){
-		$arrayDatas[$i] = $row;
-		$i++;        
-	}	
-	for($i = 0; $i < count($arrayDatas);$i++){
-		echo '<div class="modal-content" style="margin-bottom: 20px ;width:100%;">';
-		echo '<div class="modal-body" ><img style="padding:10px;max-width:300px;border-radius:15px;" src="upload/img/'. $arrayDatas[$i][0] .'"><label>' . $arrayDatas[$i][1] . '</label></div>';
-		echo '<div class="modal-footer" style="text-align:left;border-radius: 20px;">';
-		echo 'Date de création : ' . $arrayDatas[$i][2] . '</div>';
-		echo '</div>';
-	}
-}
-?>
