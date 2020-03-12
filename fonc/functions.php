@@ -43,7 +43,7 @@ function addMediaAndPost(){
 
 function uploadMedia($directory, $postInput, $imageNumber){
     global $conn;
-    $conn->beginTransaction();    
+    $conn->beginTransaction();
 
     if(isset($postInput) && !empty($postInput)){
         //Add Post
@@ -114,7 +114,7 @@ function checkFileSize($file,$count){
 function showAllImages(){
     global $conn;
 	$_SESSION['imgNames'] = array();
-    $sqlGetAllImagesName = "SELECT commentaire,nomMedia,posts.creationDate,typeMedia FROM posts LEFT JOIN medias ON posts.idPost = medias.idPost";
+    $sqlGetAllImagesName = "SELECT  posts.idPost,commentaire,nomMedia,posts.creationDate,typeMedia FROM posts LEFT JOIN medias ON posts.idPost = medias.idPost";
 	$arrayDatas = array();
     $i = 0;
     foreach ($conn->query($sqlGetAllImagesName) as $row){
@@ -122,26 +122,32 @@ function showAllImages(){
         $i++;                
     }	
 
-	for($i = 0; $i < count($arrayDatas);$i++){        
+	for($i = 0; $i < count($arrayDatas);$i++){               
         echo '<div class="modal-content" style="margin-bottom: 20px ;width:100%;">';
+        echo "<table style='margin-left:1%;margin-top:1%;'><tr>";
         echo '<div class="modal-body" >';
-
-        if (strpos($arrayDatas[$i][3],"image") !== false){
-            echo '<img style="padding:3%;max-width:500px;border-radius:25px;" src="upload/img/'. $arrayDatas[$i][1] .'"/>';            
-        }else if (strpos($arrayDatas[$i][3],"video") !== false){
-            echo '<video style="border-radius:5px;padding-top:3%;padding-left:3%;posistion:absolute;" width="500" controls autoplay loop>';
-            echo '<source src="upload/video/' . $arrayDatas[$i][1] . '">';
-            echo '</video>';
-        } else if (strpos($arrayDatas[$i][3],"audio") !== false){
-            echo '<video style="border-radius:5px;margin-left:3%;posistion:absolute;" width="400" controls>';
-            echo '<source autoplay loop src="upload/sound/' . $arrayDatas[$i][1] . '"">';
-            echo '<video>';
+        if (strpos($arrayDatas[$i][4],"image") !== false){
+            echo '<td><img style="padding:3%;max-width:500px;border-radius:25px;" src="upload/img/'. $arrayDatas[$i][2] .'"/></td>';
+        }else if (strpos($arrayDatas[$i][4],"video") !== false){
+            echo '<td><video style="padding:3%;border-radius:25px;" width="500" controls autoplay loop>';
+            echo '<source src="upload/video/' . $arrayDatas[$i][2] . '">';
+            echo '</video></td>';
+        } else if (strpos($arrayDatas[$i][4],"audio") !== false){
+            echo '<td><video style="border-radius:5px;margin-left:3%;posistion:absolute;" width="400" controls>';
+            echo '<source autoplay loop src="upload/sound/' . $arrayDatas[$i][2] . '"">';
+            echo '</video></td>';
         }
-
-        echo '<label style="padding: 50px;">' . $arrayDatas[$i][0] . "</label></div>";
-		echo '<div class="modal-footer" style="text-align:left;border-radius: 20px;">';
-		echo 'Date de création : ' . $arrayDatas[$i][2] . '</div>';
-        echo '</div>';
+        
+        echo '<td><label>' . $arrayDatas[$i][1] . "</label></td>";        
+        echo "<tr><td>";
+        echo '<a style="padding-left:3%;padding-top:3%;" href="fonc/deleteUser.php?idPost=' . $arrayDatas[$i][0] . '&mediaType=' . $arrayDatas[$i][4] . '&mediaName=' . $arrayDatas[$i][2] . '">';
+        echo '<i class="glyphicon glyphicon-trash" >Delete</i></a>';
+        echo "<a href='index.php' style='padding-left:3%;'>";
+        echo '<i class="glyphicon glyphicon-pencil" >Modify</i></a></td></tr>';        
+        echo "</table>";
+        echo '<div class="modal-footer" style="text-align:left;border-radius: 20px;">';
+		echo 'Date de création : ' . $arrayDatas[$i][3] . '</div>';
+        echo '</div>';  
 	}
 }
 ?>

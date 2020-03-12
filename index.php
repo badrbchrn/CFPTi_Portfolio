@@ -135,7 +135,10 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="assets/js/jquery.js"></script>
+	<script
+			  src="http://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
 	<script type="text/javascript" src="assets/js/bootstrap.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
